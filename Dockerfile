@@ -22,20 +22,22 @@ RUN sudo apt-get update -qq && sudo apt-get -qq install -y build-essential \
     gcc-arm-linux-gnueabihf \
     g++-arm-linux-gnueabihf
 
-WORKDIR $HOME
-RUN mkdir buildroot && sudo mkdir -p /opt/adapteva
+# Note that WORKDIR will not expand environment variables in docker versions < 1.3.1.
+# See docker issue 2637: https://github.com/docker/docker/issues/2637
+WORKDIR /root
+RUN mkdir -p /opt/buildroot && mkdir -p /opt/examples
+ENV EPIPHANY_BUILD_HOME /opt/buildroot
 
-WORKDIR $HOME/buildroot
+WORKDIR /opt/buildroot
 RUN git clone https://github.com/adapteva/epiphany-sdk sdk --branch 2014.11
+RUN ./sdk/build-epiphany-sdk.sh -t 2014.11 -C -a x86_64 && echo SDK BUILD OK || cat logs/2014.11/build*.log
 
-WORKDIR $HOME/buildroot/sdk
-RUN ./build-epiphany-sdk.sh -C -a x86_64 && echo OK || cat ../logs/2014.11/build*.log
-ENV EPIPHANY_HOME $HOME/buildroot/esdk.RevUndefined/
-ENV PATH $HOME/buildroot/esdk.RevUndefined/tools/e-gnu/bin:PATH
-ENV MANPATH $HOME/buildroot/esdk.RevUndefined/tools/e-gnu/share/man:$MANPATH
+ENV EPIPHANY_HOME /opt/buildroot/esdk.RevUndefined/
+ENV PATH /opt/buildroot/esdk.RevUndefined/tools/e-gnu/bin:$PATH
+ENV MANPATH /opt/buildroot/esdk.RevUndefined/tools/e-gnu/share/man:$MANPATH
 
-WORKDIR $HOME/buildroot
+# Clone and build the official Parallella examples as a proof of concept.
+WORKDIR /opt
 RUN git clone https://github.com/adapteva/epiphany-examples.git examples
-
-WORKDIR $HOME/buildroot/examples/scripts
+WORKDIR /opt/examples/scripts
 RUN ./build_all.sh
