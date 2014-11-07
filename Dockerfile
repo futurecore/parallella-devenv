@@ -29,7 +29,10 @@ WORKDIR $HOME/buildroot
 RUN git clone https://github.com/adapteva/epiphany-sdk sdk --branch 2014.11
 
 WORKDIR $HOME/buildroot/sdk
-RUN ./build-epiphany-sdk.sh -c arm-linux-gnueabihf -C && echo OK || cat ../logs/2014.11/build*.log
+RUN ./build-epiphany-sdk.sh -C -a x86_64 && echo OK || cat ../logs/2014.11/build*.log
+ENV EPIPHANY_HOME $HOME/buildroot/esdk.RevUndefined/
+ENV PATH $HOME/buildroot/esdk.RevUndefined/tools/e-gnu/bin:PATH
+ENV MANPATH $HOME/buildroot/esdk.RevUndefined/tools/e-gnu/share/man:$MANPATH
 
 WORKDIR $HOME/buildroot
 RUN git clone https://github.com/adapteva/epiphany-examples.git examples
