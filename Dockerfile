@@ -45,3 +45,5 @@ WORKDIR /home/dev
 RUN git clone https://github.com/adapteva/epiphany-examples.git examples
 WORKDIR /home/dev/examples/scripts
 RUN ./build_all.sh
+
+ENTRYPOINT ["/bin/bash"]
