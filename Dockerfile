@@ -29,7 +29,7 @@ WORKDIR $HOME/buildroot
 RUN git clone https://github.com/adapteva/epiphany-sdk sdk --branch 2014.11
 
 WORKDIR $HOME/buildroot/sdk
-RUN ./build-epiphany-sdk.sh -c arm-linux-gnueabihf -C
+RUN ./build-epiphany-sdk.sh -c arm-linux-gnueabihf -C && echo OK || cat ../logs/2014.11/build*.log
 
 WORKDIR $HOME/buildroot
 RUN git clone https://github.com/adapteva/epiphany-examples.git examples
