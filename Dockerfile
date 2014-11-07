@@ -18,9 +18,7 @@ RUN sudo apt-get update -qq && sudo apt-get -qq install -y build-essential \
     libmpfr-dev \
     texinfo \
     xzip \
-    lzip \
-    gcc-arm-linux-gnueabihf \
-    g++-arm-linux-gnueabihf
+    lzip
 
 RUN mkdir -p /home/dev && \
     groupadd -r dev -g 433 && \
