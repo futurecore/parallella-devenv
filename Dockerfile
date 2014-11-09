@@ -21,7 +21,7 @@ RUN sudo apt-get update -qq && sudo apt-get -qq install -y build-essential \
     lzip
 
 # Setup user 'dev' and add to sudoers.
-RUN adduser --quiet --shell /bin/bash --disabled-password dev && \
+RUN adduser --quiet --shell /bin/bash --gecos "Epiphany Developer,101,," --disabled-password dev && \
     adduser dev sudo && \
     chown -R dev:dev /home/dev/ && \
     echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
