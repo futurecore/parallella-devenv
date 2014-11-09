@@ -31,7 +31,7 @@ ENV HOME /home/dev
 # Note that WORKDIR will not expand environment variables in docker versions < 1.3.1.
 # See docker issue 2637: https://github.com/docker/docker/issues/2637
 WORKDIR /home/dev
-RUN mkdir -p /home/dev/buildroot && mkdir -p /home/dev/examples
+RUN mkdir -p /home/dev/buildroot
 ENV EPIPHANY_BUILD_HOME /home/dev/buildroot
 
 WORKDIR /home/dev/buildroot
