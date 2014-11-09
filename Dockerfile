@@ -20,11 +20,13 @@ RUN sudo apt-get update -qq && sudo apt-get -qq install -y build-essential \
     xzip \
     lzip
 
-RUN mkdir -p /home/dev && \
-    groupadd -r dev -g 433 && \
-    useradd -u 431 -r -g dev -d /home/dev -s /sbin/nologin -c "Docker image user" dev && \
-    chown -R dev:dev /home/dev
+# Setup user 'dev' and add to sudoers.
+RUN adduser --quiet --shell /bin/bash --disabled-password dev && \
+    adduser dev sudo && \
+    chown -R dev:dev /home/dev/ && \
+    echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 USER dev
+ENV HOME /home/dev
 
 # Note that WORKDIR will not expand environment variables in docker versions < 1.3.1.
 # See docker issue 2637: https://github.com/docker/docker/issues/2637
@@ -46,4 +48,5 @@ RUN git clone https://github.com/adapteva/epiphany-examples.git examples
 WORKDIR /home/dev/examples/scripts
 RUN ./build_all.sh
 
-ENTRYPOINT ["/bin/bash"]
+USER dev
+WORKDIR /home/dev
