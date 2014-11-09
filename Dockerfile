@@ -18,7 +18,9 @@ RUN sudo apt-get update -qq && sudo apt-get -qq install -y build-essential \
     libmpfr-dev \
     texinfo \
     xzip \
-    lzip
+    lzip \
+    gcc-arm-linux-gnueabihf \
+    g++-arm-linux-gnueabihf
 
 # Setup user 'dev' and add to sudoers.
 RUN adduser --quiet --shell /bin/bash --gecos "Epiphany Developer,101,," --disabled-password dev && \
