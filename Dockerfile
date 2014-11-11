@@ -16,6 +16,7 @@ RUN sudo apt-get update -qq && sudo apt-get -qq install -y build-essential \
     libncurses-dev \
     libmpc-dev \
     libmpfr-dev \
+    locate \
     texinfo \
     xzip \
     lzip \
