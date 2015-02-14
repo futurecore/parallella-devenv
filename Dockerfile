@@ -25,6 +25,7 @@ RUN sudo apt-get update -qq && sudo apt-get -qq install -y build-essential \
     libmpfr-dev \
     locate \
     texinfo \
+    wget \
     xzip \
     lzip \
     zip
