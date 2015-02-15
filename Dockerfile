@@ -51,7 +51,9 @@ WORKDIR /home/dev/buildroot
 RUN git clone https://github.com/adapteva/epiphany-sdk sdk --branch 2015.1 && \
     ./sdk/build-epiphany-sdk.sh -C -R -a armv7l -c arm-linux-gnueabihf && \
     cp -a esdk.2015.1/ /opt/adapteva/ && \
-    ln -s /opt/adapteva/esdk.2015.1 /opt/adapteva/esdk
+    ln -s /opt/adapteva/esdk.2015.1 /opt/adapteva/esdk && \
+    rm /opt/adapteva/esdk/tools/e-gnu && \
+    ln -s /opt/adapteva/esdk/tools/e-gnu.86_64 /opt/adapteva/esdk/tools/e-gnu
 
 # Set environment variables for the new toolchain.
 ENV EPIPHANY_HOME /opt/adapteva/esdk
