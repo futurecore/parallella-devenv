@@ -65,3 +65,6 @@ ENV MANPATH ${EPIPHANY_HOME}/tools/e-gnu/share/man:${MANPATH}
 # Clone the official Epiphany examples repository into $HOME/examples.
 WORKDIR /home/dev
 RUN git clone https://github.com/adapteva/epiphany-examples.git examples
+
+# Expose a port so that GDB can connect to a Parallella board.
+EXPOSE 51000
