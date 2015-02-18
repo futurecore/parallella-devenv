@@ -79,4 +79,4 @@ WORKDIR /home/dev
 EXPOSE 51000
 
 # Start from a BASH shell.
-CMD ['/bin/bash']
+CMD ["bash"]
