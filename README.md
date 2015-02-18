@@ -19,10 +19,10 @@ $ docker run  -t -i snim2/parallella-devenv /bin/bash
 
 This will create a BASH shell in the `$HOME` directory which is located at `/home/dev/`.
 
-There are two directories inside the home directory:
+There are two directories you need to know about:
 
-  * `buildroot` - which contains the SDK, toolchain and modified Linux kernel for the Parallella board. The SDK is installed in the directory `/opt/adapteva` and relevant environment variables (such as `$PATH`, `$LD_LIBRARY_PATH` and `$MANPATH`) have been set. The path `/opt/adapteva/` is readable and writeable by the default user `dev`.
-  * `examples` - a clone of the official [Epiphany examples](https://github.com/adapteva/epiphany-examples) repository.
+  * `/opt/adapteva/esdk` - which contains an installed version of the Epiphany SDK and toolchain. Relevant environment variables (such as `$PATH`, `$LD_LIBRARY_PATH` and `$MANPATH`) have been set. The path `/opt/adapteva/` is readable and writeable by the default user `dev`.
+  * `/home/dev/examples` - a clone of the official [Epiphany examples](https://github.com/adapteva/epiphany-examples) repository.
 
 ![demo](https://raw.githubusercontent.com/futurecore/parallella-devenv/master/screenshots/demo-start.gif)
 
