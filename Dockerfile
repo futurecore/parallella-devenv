@@ -77,3 +77,6 @@ WORKDIR /home/dev
 
 # Expose a port so that GDB can connect to a Parallella board.
 EXPOSE 51000
+
+# Start from a BASH shell.
+CMD ['/bin/bash']
