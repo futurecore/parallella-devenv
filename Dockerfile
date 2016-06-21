@@ -5,9 +5,9 @@
 # See: http://www.parallella.org
 #
 
-FROM ubuntu:utopic
+FROM ubuntu:xenial
 
-MAINTAINER Sarah Mount <s.mount@wlv.ac.uk>
+MAINTAINER Sarah Mount <sarah.mount@kcl.ac.uk>
 
 # Install prerequisites.
 # Setup a new user 'dev' and add to sudoers.
