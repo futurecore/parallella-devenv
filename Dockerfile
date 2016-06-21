@@ -17,10 +17,12 @@ RUN sudo apt-get update -qq && sudo apt-get -qq install -y build-essential \
     g++-arm-linux-gnueabihf \
     gcc-arm-linux-gnueabihf \
     git \
+    guile-1.8 \
     libgmp3-dev \
     libncurses5-dev \
     libmpc-dev \
     libmpfr-dev \
+    libtool \
     locate \
     texinfo \
     wget \
@@ -47,17 +49,14 @@ ENV EPIPHANY_BUILD_HOME /home/dev/buildroot
 # Remove temporary files to save space.
 # Download the official Epiphany examples repository into $HOME/examples.
 WORKDIR /home/dev/buildroot
-RUN wget --no-check-certificate https://github.com/adapteva/epiphany-sdk/archive/2015.1.zip && \
-    unzip 2015.1.zip && \
-    rm 2015.1.zip && \
-    mv epiphany-sdk-2015.1 sdk && \
+RUN wget --no-check-certificate https://github.com/adapteva/epiphany-sdk/archive/2016.3.zip && \
+    unzip 2016.3.zip && \
+    rm 2016.3.zip && \
+    mv epiphany-sdk-2016.3 sdk && \
     sed -i.bak s/--clone/--download/g sdk/build-epiphany-sdk.sh && \
-    ./sdk/build-epiphany-sdk.sh -C -R -a x86_64 && \
-    ./sdk/build-epiphany-sdk.sh -C -R -a armv7l -c arm-linux-gnueabihf && \
-    cp -a esdk.2015.1/ /opt/adapteva/ && \
-    ln -s /opt/adapteva/esdk.2015.1 /opt/adapteva/esdk && \
-    rm /opt/adapteva/esdk/tools/e-gnu && \
-    ln -s /opt/adapteva/esdk/tools/e-gnu.x86_64 /opt/adapteva/esdk/tools/e-gnu && \
+    ./sdk/build-epiphany-sdk.sh && \
+    cp -a esdk.2016.3/opt/adapteva/esdk.2016.3 /opt/adapteva/ && \
+    ln -s /opt/adapteva/esdk.2016.3 /opt/adapteva/esdk && \
     cd /home/dev/ && \
     rm -Rf /home/dev/buildroot && \
     wget --no-check-certificate https://github.com/adapteva/epiphany-examples/archive/master.zip && \
