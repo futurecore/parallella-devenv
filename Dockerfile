@@ -11,7 +11,11 @@ MAINTAINER Sarah Mount <sarah.mount@kcl.ac.uk>
 
 # Install prerequisites.
 # Setup a new user 'dev' and add to sudoers.
-RUN sudo apt-get update -qq && sudo apt-get -qq install -y build-essential \
+RUN apt-get update -qq && \
+    apt-get update && \
+    apt-get -y install sudo && \
+    useradd -m docker && echo "docker:docker" | chpasswd && adduser docker sudo && \
+    sudo apt-get -qq install -y build-essential \
     bison \
     flex \
     g++-arm-linux-gnueabihf \
